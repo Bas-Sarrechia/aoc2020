@@ -1,47 +1,37 @@
-class Challenge1Solver {
-  int solveFirst(List<int> expenses) {
-    for (int i = 0; i < expenses.length; i++) {
-      for (int j = i; j < expenses.length; j++) {
-        int sum = expenses[i] + expenses[j];
+import 'aoc2020.dart';
+
+class Challenge1Solver extends AOC2020 {
+  List<int> _expenses = [];
+
+  Challenge1Solver(String input) {
+    input = input.endsWith('\n') ? input.substring(0, input.length - 2) : input;
+    _expenses = input.split('\n').map((e) => int.parse(e)).toList();
+  }
+
+  void solveFirst() {
+    for (int i = 0; i < _expenses.length; i++) {
+      for (int j = i; j < _expenses.length; j++) {
+        int sum = _expenses[i] + _expenses[j];
         if (sum == 2020) {
-          print(expenses[i] * expenses[j]);
-          return expenses[i] * expenses[j];
+          print(_expenses[i] * _expenses[j]);
         }
       }
     }
-    return 0;
   }
 
-  int getValidInput(List<int> expenses, Function predicate) {
-    for (int i = 0; i < expenses.length; i++) {
-      for (int j = i; j < expenses.length; j++) {
-        int sum = expenses[i] + expenses[j];
-        predicate(sum);
-        if (sum == 2020) {
-          print(expenses[i] * expenses[j]);
-          return expenses[i] * expenses[j];
-        }
-      }
-    }
-    return 0;
-  }
-
-  int solveSecond(List<int> expenses) {
-    for (int i = 0; i < expenses.length; i++) {
-      for (int j = i; j < expenses.length; j++) {
-        int sumOfTwo = expenses[i] + expenses[j];
+  void solveSecond() {
+    for (int i = 0; i < _expenses.length; i++) {
+      for (int j = i; j < _expenses.length; j++) {
+        int sumOfTwo = _expenses[i] + _expenses[j];
         if (sumOfTwo < 2020) {
-          for (int k = j; k < expenses.length; k++) {
-            int sumOfThree = sumOfTwo + expenses[k];
+          for (int k = j; k < _expenses.length; k++) {
+            int sumOfThree = sumOfTwo + _expenses[k];
             if (2020 == sumOfThree) {
-              print(expenses[i] * expenses[j] * expenses[k]);
-              return expenses[i] * expenses[j] * expenses[k];
+              print(_expenses[i] * _expenses[j] * _expenses[k]);
             }
           }
         }
       }
     }
-    return 0;
   }
-
 }
